@@ -6,6 +6,7 @@
         <VuetifyLogo />
       </v-card>
       <v-card>
+        <div class="bg-black hover:bg-red rounded-xl p-10"><h1>TEST</h1></div>
         <v-card-title class="headline">
           Welcome to the Vuetify + Nuxt.js template
         </v-card-title>
