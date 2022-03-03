@@ -23,6 +23,11 @@ export default {
   css: [
   ],
 
+  //Server Middleware
+  serverMiddleware: {
+    '/api': '~/api'
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
   ],
