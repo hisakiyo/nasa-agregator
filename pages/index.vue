@@ -1,5 +1,9 @@
 <template>
-  <button @click="showMessageFromBackend">Show message from backend</button>
+  <div>
+    <button @click="showMessageFromBackend">Show message from backend</button>
+    <p>{{ $t("welcome") }}</p>
+  </div>
+  
 </template>
 
 <script>
