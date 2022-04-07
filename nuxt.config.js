@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+import * as hosts from './hosts.config.js'
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -31,8 +32,8 @@ export default {
 
   // Server configuration
   server: {
-    host: 'localhost', // default: localhost
-    port: 3000 // default: 3000
+    host: hosts.default.host, // default: localhost
+    port: hosts.default.port // default: 3000
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
