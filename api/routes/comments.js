@@ -13,8 +13,9 @@ const db = require('../db/init.js')
 router.get('/comments', (req, res) => {
     db.all('SELECT * FROM COMMENTS', (err, rows) => {
         if (err) {
-            console.log(err)
             res.status(500).send(err)
+        } else if(rows.length === 0) {
+            res.status(404).send('No comments found')
         } else {
             res.status(200).send(rows)
         }
@@ -26,6 +27,8 @@ router.get('/comments/:id', (req, res) => {
     db.get('SELECT * FROM COMMENTS WHERE id = ?', req.params.id, (err, row) => {
         if (err) {
             res.status(500).send(err)
+        } else if (row.length === 0) {
+            res.status(404).send('No comments found')
         } else {
             res.status(200).send(row)
         }
