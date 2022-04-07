@@ -3,8 +3,8 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - nasa-agregator',
-    title: 'nasa-agregator',
+    titleTemplate: '%s - NASA Agregator',
+    title: 'NASA Agregator',
     htmlAttrs: {
       lang: 'en'
     },
@@ -21,7 +21,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '@/assets/css/main.css',
+    '@/assets/css/main.scss'
   ],
 
   //Server Middleware
@@ -49,10 +49,37 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/i18n',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
+
+  i18n: {
+    locales: ['en', 'fr'],
+    defaultLocale: 'en',
+    vueI18n: {
+      fallbackLocale: 'en',
+      messages: {
+        en: {
+          english: 'English',
+          french: 'French',
+          welcome: 'Welcome',
+          home: 'Home',
+          about: 'About',
+          news: 'News',
+        },
+        fr: {
+          english: 'Anglais',
+          french: 'Français',
+          welcome: 'Bienvenue',
+          home: 'Accueil',
+          about: 'À propos',
+          news: 'Articles',
+        },
+      }
+    }
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -81,5 +108,8 @@ export default {
         autoprefixer: {},
       },
     },
+    transpile: [
+      "three"
+    ]
   }
 }
