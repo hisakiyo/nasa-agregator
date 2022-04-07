@@ -1,8 +1,6 @@
 <template>
   <div>
     <p>{{ $t("welcome") }}</p>
-    <v-btn @click="test()">Test</v-btn>
-    <p>{{ testContent }}</p>
   </div>
 
 </template>
@@ -17,7 +15,7 @@ export default {
   },
   head() {
     return {
-      title: 'Accueil',
+      title: 'Actualités',
     }
   },
   methods: {

@@ -17,7 +17,7 @@ export default {
   },
   head() {
     return {
-      title: 'Accueil',
+      title: 'A propos',
     }
   },
   methods: {
