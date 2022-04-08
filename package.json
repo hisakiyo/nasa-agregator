@@ -20,6 +20,7 @@
     "jwt-decode": "^3.1.2",
     "nuxt": "^2.15.7",
     "three": "^0.139.2",
+    "threejs-object-controls": "^1.2.8",
     "vuetify": "^2.5.5"
   },
   "devDependencies": {

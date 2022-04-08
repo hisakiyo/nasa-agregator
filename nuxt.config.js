@@ -68,6 +68,8 @@ export default {
           home: 'Home',
           about: 'About',
           news: 'News',
+          explore: 'LET\'S EXPLORE SPACE TOGETHER',
+          explore_text: 'You will find here a set of information on space, mostly from NASA APIs. This site aims to exploit them as well as possible and to put forward the relevant information.',
         },
         fr: {
           english: 'Anglais',
@@ -76,6 +78,8 @@ export default {
           home: 'Accueil',
           about: 'À propos',
           news: 'Articles',
+          explore: 'EXPLORONS L\'ESPACE ENSEMBLE',
+          explore_text: 'Vous trouverez ici un ensemble d\'informations sur le spatiale, provenant majoritairement des API de la NASA. Ce site a pour objectif de les exploiter au mieux et de mettre en avant les informations pertinentes.',
         },
       }
     }
@@ -109,7 +113,8 @@ export default {
       },
     },
     transpile: [
-      "three"
+      "three",
+      "threeJS-object-controls"
     ]
   }
 }
