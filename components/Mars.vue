@@ -7,7 +7,7 @@
 <script>
 import * as THREE from 'three'
 import {Clock} from 'three'
-import {ObjectControls} from 'threeJS-object-controls';
+// import {ObjectControls} from 'threeJS-object-controls';
 
 export default {
   components: {},
@@ -41,14 +41,15 @@ export default {
   methods: {
     init() {
       const self = this
-      // setup
+
+      // Setup
       self.container = self.$refs.canvas
       self.scene = new THREE.Scene()
       self.scene.background = new THREE.Color("#000")
       self.stagecenter = new THREE.Vector3(0, 0, 0)
       self.lastCameraPos = new THREE.Vector3(0, 0, 0)
 
-      // setup renderer
+      // Setup renderer
       self.clock = new Clock()
       self.renderer = new THREE.WebGLRenderer({
         alpha: true,
@@ -61,16 +62,15 @@ export default {
         // self.container.clientHeight
         1200
       )
-      self.renderer.shadowMap.enabled = true // important!
+      self.renderer.shadowMap.enabled = true
       self.renderer.shadowMap.type = THREE.PCFSoftShadowMap
       self.renderer.toneMapping = THREE.ACESFilmicToneMapping
       self.renderer.toneMappingExposure = 1
       self.renderer.outputEncoding = THREE.sRGBEncoding
       self.renderer.setPixelRatio(window.devicePixelRatio)
       self.container.appendChild(self.renderer.domElement)
-      // self.renderer.gammaFactor = 2.2
 
-      // setup camera
+      // Setup camera
       self.camera = new THREE.PerspectiveCamera(
         75,
         self.container.clientWidth / self.container.clientHeight,
@@ -82,11 +82,8 @@ export default {
       self.camera.position.x = 0
       self.camera.position.y = 0.1
 
-      // create world
+      // Create world
       self.createWorld()
-
-      // add resize listener
-      window.addEventListener('resize', self.resize, false)
     },
     setupLight() {
       const self = this
@@ -96,17 +93,19 @@ export default {
     },
     async createWorld() {
       const self = this
-      // create world
+
+      // Create world
       self.world = new THREE.Group()
       self.scene.add(self.world)
       self.world.position.set(0, 0, 0)
       await self.setupLight()
 
-      // add sphere
+      // Add sphere
       const geometry = new THREE.SphereGeometry(1, 32, 32);
       const material = new THREE.MeshPhongMaterial();
       const mesh = new THREE.Mesh(geometry, material);
 
+      // Add textures
       material.map = new THREE.TextureLoader().load('./textures/diffuse.jpeg');
       material.bumpMap = new THREE.TextureLoader().load('./textures/bump.jpeg');
       material.bumpScale = 0.010;
@@ -116,8 +115,8 @@ export default {
       mesh.castShadow = true
       self.world.add(mesh)
 
-      const controls = new ObjectControls(self.camera, self.renderer.domElement, self.mesh);
-      controls.disableZoom()
+      // const controls = new ObjectControls(self.camera, self.renderer.domElement, self.mesh);
+      // controls.disableZoom()
       // controls.enableVerticalRotation();
       // controls.setMaxVerticalRotationAngle(Math.PI / 4, Math.PI / 4);
       // controls.setRotationSpeed(0.05);
@@ -129,44 +128,27 @@ export default {
       const gridHelper = new THREE.GridHelper(size, divisions)
       self.world.add(gridHelper) */
 
-      // start render
+      // Start render
       self.animate()
       await self.renderer.setAnimationLoop(self.render.bind(self))
-      self.resize()
 
-      // hide loading here
+      // Hide loading here
       self.$root.$emit('finished-loading')
     },
     render(timestamp, frame) {
       const self = this
-      // update camera
-      self.camera.aspect =
-        self.container.clientWidth / self.container.clientHeight
-      self.camera.updateProjectionMatrix()
 
-      // render scene
+      // Render scene
       self.renderer.render(self.scene, self.camera)
 
-      // render loop
+      // Render loop
       self.renderer.setAnimationLoop(self.render.bind(self))
     },
     animate() {
       const self = this
       self.world.rotation.y += 0.0015
-      // console.log(self.world.rotation.y)
       requestAnimationFrame(self.animate)
       self.render()
-    },
-    resize() {
-      const self = this
-      // update camera
-      self.camera.aspect =
-        self.container.clientWidth / self.container.clientHeight
-      self.camera.updateProjectionMatrix()
-      self.renderer.setSize(
-        self.container.clientWidth,
-        self.container.clientHeight
-      )
     },
   },
 }
