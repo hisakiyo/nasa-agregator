@@ -21,6 +21,7 @@
     "nuxt": "^2.15.7",
     "sqlite3": "^5.0.2",
     "three": "^0.139.2",
+    "threejs-object-controls": "^1.2.8",
     "vuetify": "^2.5.5"
   },
   "devDependencies": {

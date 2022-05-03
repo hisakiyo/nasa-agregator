@@ -28,3 +28,10 @@ a:not(.logo-container) {
     transform-origin: left;
   }
 }
+
+.home-header {
+  /* background-image: url('/home-bg-tmp.jpg'); */
+  /* background-size: cover; */
+  height: 100vh;
+  overflow: hidden;
+}

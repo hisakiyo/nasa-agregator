@@ -1,5 +1,5 @@
 <template>
-    <div class="header bg-black">
+    <div class="header w-full absolute">
         <div class="header-inner flex text-white m-auto py-4 justify-between">
           <div class="flex items-center">
             <router-link to="/" class="logo-container">
@@ -8,6 +8,7 @@
             <nav>
               <router-link to="/" class="uppercase font-semibold">{{ $t("home") }}</router-link>
               <router-link to="/news" class="uppercase font-semibold">{{ $t("news") }}</router-link>
+              <router-link to="/iss" class="uppercase font-semibold">ISS Explorer</router-link>
               <router-link to="/about" class="uppercase font-semibold">{{ $t("about") }}</router-link>
             </nav>
           </div>
