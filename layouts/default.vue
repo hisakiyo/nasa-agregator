@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div class="app nasa-agregator-container">
     <Header />
     <Nuxt />
     <Footer />
