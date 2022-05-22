@@ -23,6 +23,7 @@
             :key="index"
             link
             :to="item.url"
+            exact
             >
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
@@ -37,6 +38,7 @@
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-spacer />
+      <span v-if="!$auth.user">
       <v-dialog
       v-model="dialog"
       persistent
@@ -59,7 +61,7 @@
           <v-card-text>
               <v-form>
                 <v-text-field
-                    v-model="login"
+                    v-model="username"
                     label="Identifiant"
                     type="text"
                     required
@@ -74,25 +76,30 @@
                 </v-text-field>
               </v-form>
           </v-card-text>
+          {{ error }}
           <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-              color="green darken-1"
-              text
-              @click="dialog = false"
-          >
-              Annuler
-          </v-btn>
-          <v-btn
-              color="green darken-1"
-              text
-              @click="dialog = false"
-          >
-              Envoyer
-          </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn
+                color="green darken-1"
+                text
+                @click="dialog = false"
+            >
+                Annuler
+            </v-btn>
+            <v-btn
+                color="green darken-1"
+                text
+                @click="login()"
+            >
+                Envoyer
+            </v-btn>
           </v-card-actions>
       </v-card>
       </v-dialog>
+      </span>
+      <span v-else>
+        Logged in
+      </span>
     </v-app-bar>
 
     <v-main>
@@ -106,8 +113,9 @@
     data: () => ({ 
         drawer: true,
         dialog: false,
-        login: null,
+        username: null,
         password: null,
+        error: null,
         menu: [{
             title: 'dashboard',
             url: '/admin/',
@@ -128,6 +136,21 @@
         return {
             title: 'Administration',
         }
-    }
+    },
+    methods: {
+      async login() {
+        try {
+          this.error = null
+          await this.$auth.loginWith('local', {
+            data: {
+              username: this.username,
+              password: this.password
+            },
+          })
+        } catch (e) {
+          this.error = e.response.data.message
+        }
+      }
   }
+}
 </script>
