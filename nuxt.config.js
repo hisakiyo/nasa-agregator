@@ -62,7 +62,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://' + hosts.default.host + ':' + hosts.default.port,
+    baseURL: process.env.NODE_ENV === 'production' ? 'https://nasa.gmarette.xyz' : 'http://' + hosts.default.host + ':' + hosts.default.port,
   },
 
   auth: {
