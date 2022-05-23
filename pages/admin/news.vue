@@ -54,6 +54,13 @@
                         required
                         :rows="10"
                       ></v-textarea>
+                      <v-text-field
+                        v-model="editedItem.image"
+                        label="URL Image"
+                        type="text"
+                        required
+                        @keyup.enter="onEnter"
+                      ></v-text-field>
                     </v-form>
                   </v-card-text>
                   <v-card-actions>
@@ -69,7 +76,7 @@
                       color="green darken-1"
                       text
                       type="submit"
-                      @click="create"
+                      @click="createNews()"
                     >
                       <span v-if="editedIndex == -1">Create</span>
                       <span v-else>Update</span>
@@ -81,7 +88,7 @@
           </template>
       <template #[`item.actions`]="{ item }">
         <v-icon small @click="editNews(item)">mdi-pencil</v-icon>
-        <v-icon small @click="(item)">mdi-delete</v-icon>
+        <v-icon small @click="deleteNews(item)">mdi-delete</v-icon>
       </template>
     </v-data-table>
   </div>
@@ -150,16 +157,36 @@ export default {
         console.log(e)
       }
     },
-    async deleteNews(id) {
+    async deleteNews(item) {
       try {
-        await axios.delete(`/api/news/${id}`)
+        await axios.delete(`/api/news/${item.id}`)
         this.getNews()
       } catch (e) {
         console.log(e)
       }
     },
-    create() {
-
+    async createNews() {
+      if(this.editedIndex === -1) {
+        try {
+          await axios.post('/api/news', this.editedItem)
+          this.dialog = false
+          this.editedItem = {}
+          this.editedIndex = -1
+          this.getNews()
+        } catch (e) {
+          console.log(e)
+        }
+      } else {
+        try {
+          await axios.put(`/api/news/${this.editedItem.id}`, this.editedItem)
+          this.dialog = false
+          this.editedItem = {}
+          this.editedIndex = -1
+          this.getNews()
+        } catch (e) {
+          console.log(e)
+        }
+      }
     },
     editNews(item) {
       this.editedIndex = this.news.indexOf(item)

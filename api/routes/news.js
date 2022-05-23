@@ -3,10 +3,22 @@ import express from 'express'
 const { Router } = require('express')
 
 const router = Router()
+const cookieParser = require('cookie-parser')
+const jwt = require('jsonwebtoken')
 
 router.use(express.json())
+router.use(cookieParser())
 
 const db = require('../db/init.js')
+
+const tokenExtractor = function (req) {
+    let token = null
+    if (req && req.cookies && req.cookies['auth._token.local']) {
+      const rawToken = req.cookies['auth._token.local'].toString()
+      token = rawToken.slice(rawToken.indexOf(' ') + 1, rawToken.length)
+    }
+    return token
+  }
 
 // GET /news
 
@@ -37,11 +49,16 @@ router.get('/news/:id', (req, res) => {
 
 // Insert news
 router.post('/news', (req, res) => {
-    db.run('INSERT INTO NEWS (title, description, date, author_id, image) VALUES (?, ?, ?, ?, ?)', req.body.title, req.body.description, req.body.date, req.body.author_id, req.body.image, (err) => {
+    // Date is like 2022-04-01
+    const date = new Date().toISOString().slice(0, 10)
+    // Get user id with JWT token
+    const token = tokenExtractor(req)
+    const userId = jwt.verify(token, "bebou").id
+    db.run('INSERT INTO NEWS (author_id, date, description, image, title) VALUES (?, ?, ?, ?, ?)', userId, date, req.body.description, req.body.image, req.body.title, (err) => {
         if (err) {
             res.status(500).send(err)
         } else {
-            res.status(200).send('News inserted')
+            res.status(201).send('News added')
         }
     })
 })
