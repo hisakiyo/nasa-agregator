@@ -74,7 +74,6 @@ passport.use(new JwtStrategy({
   secretOrKey: authUserSecret
 },
 function (jwtPayload, done) {
-  console.log('JWT payload:', jwtPayload)
   GetUser(jwtPayload.username, function (err, user) {
     if (err) {
       return done(err)
@@ -126,5 +125,10 @@ router.get('/auth/user', (req, res) => {
   })(res, req)
 })
 
+// logout
+router.post('/auth/logout', (req, res) => {
+  res.clearCookie('auth._token.local')
+  res.send({ message: 'logged out' })
+})
 
 module.exports = router

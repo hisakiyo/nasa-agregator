@@ -71,13 +71,16 @@ export default {
       local: {
         endpoints: {
           login: { url: '/api/auth/login', method: 'post', propertyName: 'token' },
-          logout: false,
+          logout: { url: '/api/auth/logout', method: 'post' },
           user: { url: '/api/auth/user', method: 'get', propertyName: false },
         },
       },
     },
     redirect: {
       callback: '/login',
+      login: '/admin',
+      logout: '/admin',
+      home: '/admin'
     },
   },
 
