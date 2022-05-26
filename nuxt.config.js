@@ -32,7 +32,7 @@ export default {
 
   // Server configuration
   server: {
-    host: hosts.default.host, // default: localhost
+    host: process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost',
     port: hosts.default.port // default: 3000
   },
 
