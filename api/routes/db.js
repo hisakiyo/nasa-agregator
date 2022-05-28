@@ -10,4 +10,6 @@ router.use(require('./auth.js'))
 
 router.use(require('./comments.js'))
 
+router.use(require('./iss.js'))
+
 module.exports = router
