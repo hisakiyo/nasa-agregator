@@ -25,7 +25,7 @@ export default {
     }
   },
   async fetch() {
-    const res = await this.$axios.get('/api/articles')
+    const res = await this.$axios.get('/api/news')
     this.articles = res.data
   },
 }
