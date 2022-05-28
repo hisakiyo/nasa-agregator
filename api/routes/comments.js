@@ -24,15 +24,28 @@ router.get('/comments', (req, res) => {
 
 // Get comments by id
 router.get('/comments/:id', (req, res) => {
-    db.get('SELECT * FROM COMMENTS WHERE id = ?', req.params.id, (err, row) => {
-        if (err) {
-            res.status(500).send(err)
-        } else if (row.length === 0) {
-            res.status(404).send('No comments found')
-        } else {
-            res.status(200).send(row)
-        }
-    })
+  db.get('SELECT * FROM COMMENTS WHERE id = ?', req.params.id, (err, row) => {
+    if (err) {
+      res.status(500).send(err)
+    } else if (row.length === 0) {
+      res.status(404).send('No comments found')
+    } else {
+      res.status(200).send(row)
+    }
+  })
+})
+
+// Get comments by news id
+router.get('/comments/news/:id', (req, res) => {
+  db.all('SELECT * FROM COMMENTS WHERE news_id = ?', req.params.id, (err, rows) => {
+    if (err) {
+      res.status(500).send(err)
+    } else if (rows.length === 0) {
+      res.status(404).send('No comments found')
+    } else {
+      res.status(200).send(rows)
+    }
+  })
 })
 
 // Insert comments
