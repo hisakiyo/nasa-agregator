@@ -53,10 +53,9 @@ router.post('/news', (req, res) => {
     const date = new Date().toISOString().slice(0, 10)
     // Get user id with JWT token
     const token = tokenExtractor(req)
+    const userId = 1
     if (token) {
-      const userId = jwt.verify(token, "bebou").id
-    } else {
-      const userId = 1
+      userId = jwt.verify(token, "bebou").id
     }
   
     db.run('INSERT INTO NEWS (author_id, date, description, image, title) VALUES (?, ?, ?, ?, ?)', userId, date, req.body.description, req.body.image, req.body.title, (err) => {
