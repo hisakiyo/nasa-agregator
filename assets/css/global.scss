@@ -4,7 +4,7 @@ body {
 }
 
 .nasa-agregator-container {
-  a:not(.logo-container) {
+  a:not(.logo-container):not(.iss-button) {
     position: relative;
     display: inline-block;
     line-height: 25px;

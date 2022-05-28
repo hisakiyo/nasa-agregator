@@ -7,6 +7,14 @@
         <p class="text-lg">{{ $t("explore_text") }}</p>
       </div>
     </div>
+
+    <div class="home-latest-posts-container">
+      <LatestPosts />
+    </div>
+
+    <div class="home-iss-explore-container">
+      <ISSExplorerHome />
+    </div>
   </div>
 </template>
 
