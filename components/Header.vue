@@ -6,10 +6,10 @@
               <img id="logo" src="/nasa_agregator_logo_min.png" alt="NASA Agregator">
             </router-link>
             <nav>
-              <router-link to="/" class="uppercase font-semibold">{{ $t("home") }}</router-link>
-              <router-link to="/news/" class="uppercase font-semibold">{{ $t("news") }}</router-link>
-              <router-link to="/iss/" class="uppercase font-semibold">ISS Explorer</router-link>
-              <router-link to="/about/" class="uppercase font-semibold">{{ $t("about") }}</router-link>
+              <router-link :to="localePath('/')" class="uppercase font-semibold">{{ $t("home") }}</router-link>
+              <router-link :to="localePath('/news/')" class="uppercase font-semibold">{{ $t("news") }}</router-link>
+              <router-link :to="localePath('/iss/')" class="uppercase font-semibold">ISS Explorer</router-link>
+              <router-link to="localePath('/about/')" class="uppercase font-semibold">{{ $t("about") }}</router-link>
             </nav>
           </div>
           <div class="switch-languages">
