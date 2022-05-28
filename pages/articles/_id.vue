@@ -23,6 +23,7 @@
       </ul>
 
       <p class="border-b pb-2 border-slate-500 text-xl mt-10 text-slate-500 mb-4">{{ $t("comments_send") }}</p>
+      <p class="px-4 py-2 bg-green-600 rounded-lg mb-4" v-if="status">{{ $t("comments_status") }}</p>
       <v-form ref="form" lazy-validation @submit.prevent="add">
         <input v-model="comment.author_username" v-bind:placeholder="$t('comments_pseudo')" type="text" required class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
         <input v-model="comment.author_email" v-bind:placeholder="$t('comments_mail')" type="text" required class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
@@ -42,6 +43,7 @@ export default {
       article: '',
       comments: '',
       comment : {},
+      status: false,
     }
   },
   async fetch() {
@@ -72,6 +74,9 @@ export default {
         this.comment.news_id = this.article.id;
         this.comment.isValidated = false;
         await axios.post('/api/comments', this.comment)
+          .then((response) => {
+            this.status = response.status === 200;
+          })
         this.comment = {}
       } catch (e) {
         console.log(e)
