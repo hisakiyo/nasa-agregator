@@ -59,7 +59,7 @@ export default {
   methods: {
     async getMembers() {
       try {
-        const response = await axios.get('http://api.open-notify.org/astros.json')
+        const response = await axios.get('/api/iss')
         this.team = response.data
       } catch (e) {
         console.log(e)
