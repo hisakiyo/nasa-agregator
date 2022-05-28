@@ -54,7 +54,6 @@ export default {
       self.renderer = new THREE.WebGLRenderer({
         alpha: true,
         antialias: true,
-        physicallyCorrectLights: true,
         powerPreference: 'high-performance',
       })
       self.renderer.setSize(
@@ -67,7 +66,7 @@ export default {
       self.renderer.toneMapping = THREE.ACESFilmicToneMapping
       self.renderer.toneMappingExposure = 1
       self.renderer.outputEncoding = THREE.sRGBEncoding
-      self.renderer.setPixelRatio(window.devicePixelRatio)
+      self.renderer.setPixelRatio(window.devicePixelRatio / 1.5)
       self.container.appendChild(self.renderer.domElement)
 
       // Setup camera
@@ -81,6 +80,8 @@ export default {
       self.camera.position.z = 2
       self.camera.position.x = 0
       self.camera.position.y = 0.1
+      self.camera.far = 100000
+      self.camera.updateProjectionMatrix()
 
       // Create world
       self.createWorld()

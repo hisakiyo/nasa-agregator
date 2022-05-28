@@ -11,15 +11,22 @@
     "lint": "npm run lint:js"
   },
   "dependencies": {
+    "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/i18n": "^7.2.1",
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.6",
     "cookieparser": "^0.1.0",
     "core-js": "^3.15.1",
     "express": "^4.17.3",
     "js-cookie": "^3.0.1",
+    "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "nuxt": "^2.15.7",
-    "sqlite3": "^5.0.2",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "sqlite3": "^5.0.8",
     "three": "^0.139.2",
     "threejs-object-controls": "^1.2.8",
     "vuetify": "^2.5.5"

@@ -32,7 +32,7 @@ export default {
 
   // Server configuration
   server: {
-    host: hosts.default.host, // default: localhost
+    host: process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost',
     port: hosts.default.port // default: 3000
   },
 
@@ -56,11 +56,33 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
     '@nuxtjs/i18n',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: process.env.NODE_ENV === 'production' ? 'https://nasa.gmarette.xyz' : 'http://' + hosts.default.host + ':' + hosts.default.port,
+  },
+
+  auth: {
+    localStorage: true,
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/api/auth/login', method: 'post', propertyName: 'token' },
+          logout: { url: '/api/auth/logout', method: 'post' },
+          user: { url: '/api/auth/user', method: 'get', propertyName: false },
+        },
+      },
+    },
+    redirect: {
+      callback: '/login',
+      login: '/admin',
+      logout: '/admin',
+      home: '/admin'
+    },
+  },
 
   i18n: {
     locales: ['en', 'fr'],
