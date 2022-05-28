@@ -13,6 +13,9 @@ router.get('/iss', (req, res) => {
     .then((x) => {
       res.status(200).send(x.data)
     })
+    .catch(() => {
+      res.status(500)
+    })
 })
 
 module.exports = router;
