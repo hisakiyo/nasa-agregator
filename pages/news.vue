@@ -30,7 +30,7 @@ export default {
   },
   head() {
     return {
-      title: 'Actualités',
+      title: this.$t("news")
     }
   },
 }
