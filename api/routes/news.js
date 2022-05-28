@@ -53,7 +53,7 @@ router.post('/news', (req, res) => {
     const date = new Date().toISOString().slice(0, 10)
     // Get user id with JWT token
     const token = tokenExtractor(req)
-    const userId = 1
+    let userId = 1
     if (token) {
       userId = jwt.verify(token, "bebou").id
     }
